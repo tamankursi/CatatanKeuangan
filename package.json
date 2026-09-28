@@ -1,13 +1,16 @@
 {
   "name": "catatvoice",
   "private": true,
+  "homepage": "https://tamankursi.github.io/CatatanKeuangan",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "lint": "oxlint",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
@@ -25,6 +28,7 @@
     "postcss": "^8.5.28",
     "tailwindcss": "^4.3.3",
     "vite": "^8.3.0",
-    "vite-plugin-pwa": "^1.3.0"
+    "vite-plugin-pwa": "^1.3.0",
+    "gh-pages": "^5.0.0"
   }
 }
