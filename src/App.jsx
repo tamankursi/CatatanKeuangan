@@ -126,12 +126,17 @@ function App() {
   const processTranscriptWithGemini = async (transcript) => {
     setIsProcessing(true);
     try {
-      const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
-      if (!apiKey || apiKey === 'MASUKKAN_API_KEY_GEMINI_ANDA_DI_SINI') {
-        alert('API Key Gemini belum diatur. Silakan masukkan API Key Anda di file .env');
-        setIsProcessing(false);
-        setStatusText('');
-        return;
+      let apiKey = localStorage.getItem('gemini_api_key');
+      if (!apiKey) {
+        apiKey = prompt('Masukkan API Key Gemini Anda untuk menggunakan fitur suara:\n(API Key akan disimpan di browser Anda)');
+        if (apiKey) {
+          localStorage.setItem('gemini_api_key', apiKey.trim());
+        } else {
+          setIsProcessing(false);
+          setStatusText('Dibatalkan: API Key diperlukan.');
+          setTimeout(() => setStatusText(''), 3000);
+          return;
+        }
       }
 
       const genAI = new GoogleGenerativeAI(apiKey);
